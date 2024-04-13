@@ -1,0 +1,47 @@
+{
+  "source": "ehr-100",
+  "users": [
+    {
+      "ehr_id": 103,
+      "name": "Amanda Johnson",
+      "date_of_birth": "1990-01-01",
+      "email": "amanda.j@example.com",
+      "phone": "+15551234567"
+    },
+    {
+      "ehr_id": 310,
+      "name": "Jordan Amy Smith",
+      "date_of_birth": "1994-08-22",
+      "email": "jordan.s@example.net",
+      "phone": "+15559876543"
+    },
+    {
+      "ehr_id": 10928,
+      "name": "Carlos Rodriguez",
+      "date_of_birth": "1986-02-10",
+      "email": "carlos.r@example.org",
+      "phone": "+15553217890"
+    },
+    {
+      "ehr_id": 870,
+      "name": "Emily Davis",
+      "date_of_birth": "2001-11-31",
+      "email": "emily.d@example.com",
+      "phone": "+15557890123"
+    },
+    {
+      "ehr_id": 6749,
+      "name": "Michael Brown",
+      "date_of_birth": "1990-06-07",
+      "email": "michael.b@example.net",
+      "phone": "+15552345678"
+    },
+    {
+      "ehr_id": 7239,
+      "name": "Sarah Miller",
+      "date_of_birth": "1990-09-28",
+      "email": "sarah.m@example.org",
+      "phone": "+15558765432"
+    }
+  ]
+}
