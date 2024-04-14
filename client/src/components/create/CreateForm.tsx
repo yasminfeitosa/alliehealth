@@ -1,13 +1,18 @@
 import { Alert, Box, Button, TextField } from "@mui/material";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import useAxios from "axios-hooks";
-import { FieldValues, useForm } from "react-hook-form";
+import { FieldValues, set, useForm } from "react-hook-form";
+import { DatePicker } from "@mui/x-date-pickers";
+import { useEffect, useState } from "react";
+import { Dayjs } from 'dayjs';
 
 type Props = {
   onSubmit: () => void;
 };
 
 const CreateForm = ({ onSubmit }: Props) => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, setValue } = useForm();
   const [{ loading, error }, executePost] = useAxios(
     {
       url: `${process.env.REACT_APP_SERVER_BASE_URL}/users`,
@@ -15,11 +20,21 @@ const CreateForm = ({ onSubmit }: Props) => {
     },
     { manual: true }
   );
+  const [selectedBirthDate, setSelectedBirthDate] = useState<Dayjs | null>(null);
 
   const onFormSubmit = async (data: FieldValues) => {
+    console.log("Debug: ", data);
     await executePost({ data });
     onSubmit();
   };
+
+  const handleBirtDateChange = (date: Dayjs | null) => {
+    setSelectedBirthDate(date)
+  }
+
+  useEffect(() => {
+    setValue("birthdate", selectedBirthDate?.format("YYYY-MM-DD"))
+  }, [selectedBirthDate, setValue]);
 
   return (
     <>
@@ -47,6 +62,12 @@ const CreateForm = ({ onSubmit }: Props) => {
             {...register("lastName")}
           />
           <TextField label="Email" variant="outlined" {...register("email")} />
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DatePicker 
+              value={selectedBirthDate}
+              onChange={handleBirtDateChange}
+            ></DatePicker>
+          </LocalizationProvider>
           <Button variant="contained" type="submit" disabled={loading}>
             Create User
           </Button>
