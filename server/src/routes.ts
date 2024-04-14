@@ -37,6 +37,28 @@ router.post("/users", (req: Request, res: Response) => {
   });
 });
 
+router.put("/user/:id", (req: Request, res: Response) => {
+  if (!req.body.firstName || !req.body.lastName || !req.body.email || !req.body.birthdate) {
+    res.sendStatus(400);
+    return;
+  }
+
+  const user = db
+    .prepare(
+      "UPDATE users (first_name, last_name, email, birthdate) VALUES (@firstName, @lastName, @email, @birthdate) WHERE id = :id"
+    )
+    .run({
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      birthdate: req.body.birthdate,
+    });
+
+  res.json({
+    id: user.lastInsertRowid,
+  });
+});
+
 router.post(
   "/users/bulk",
   upload.single("file"),
