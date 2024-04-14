@@ -23,7 +23,6 @@ const CreateForm = ({ onSubmit }: Props) => {
   const [selectedBirthDate, setSelectedBirthDate] = useState<Dayjs | null>(null);
 
   const onFormSubmit = async (data: FieldValues) => {
-    console.log("Debug: ", data);
     await executePost({ data });
     onSubmit();
   };
