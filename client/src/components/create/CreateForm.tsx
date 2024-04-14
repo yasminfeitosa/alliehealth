@@ -6,12 +6,14 @@ import { FieldValues, set, useForm } from "react-hook-form";
 import { DatePicker } from "@mui/x-date-pickers";
 import { useEffect, useState } from "react";
 import { Dayjs } from 'dayjs';
+import { User } from "../../types/User";
 
 type Props = {
   onSubmit: () => void;
+  initialValues?: User | null | undefined;
 };
 
-const CreateForm = ({ onSubmit }: Props) => {
+const CreateForm = ({ onSubmit, initialValues }: Props) => {
   const { register, handleSubmit, setValue } = useForm();
   const [{ loading, error }, executePost] = useAxios(
     {
@@ -23,7 +25,6 @@ const CreateForm = ({ onSubmit }: Props) => {
   const [selectedBirthDate, setSelectedBirthDate] = useState<Dayjs | null>(null);
 
   const onFormSubmit = async (data: FieldValues) => {
-    console.log("Debug: ", data);
     await executePost({ data });
     onSubmit();
   };
