@@ -50,7 +50,10 @@ const Home = () => {
       <UsersTable users={data.users} />
       <CreateUserModal
         open={isCreateUserOpen}
-        handleClose={() => setIsCreateUserOpen(!isCreateUserOpen)}
+        handleClose={() => {
+          refetch();
+          setIsCreateUserOpen(!isCreateUserOpen)}
+        }
       />
     </>
   );
